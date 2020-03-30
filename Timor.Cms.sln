@@ -8,7 +8,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Timor.Cms.Domains", "src\Ti
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Repository", "Repository", "{89E94202-A5ED-4283-AB7E-339001086B33}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Timor.Cms.Repository.MongoDb", "src\Timor.Cms.Repository.MongoDb\Timor.Cms.Repository.MongoDb.csproj", "{B10EB7ED-9177-4F73-8955-258C0309A5AB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Timor.Cms.Repository.MongoDb", "src\Repository\Timor.Cms.Repository.MongoDb\Timor.Cms.Repository.MongoDb.csproj", "{B10EB7ED-9177-4F73-8955-258C0309A5AB}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Timor.Cms.Service.Tests", "tests\Timor.Cms.Service.Tests\Timor.Cms.Service.Tests.csproj", "{4D0D19AE-2155-48BF-A9F1-FBE62A37F74A}"
 EndProject
@@ -19,6 +19,8 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Timor.Cms.Api", "src\Timor.Cms.Api\Timor.Cms.Api.csproj", "{D96E4380-B5CE-47D0-8054-AD78DD5B8126}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Timor.Cms.Repository.MongoDb.Tests", "tests\Timor.Cms.Repository.MongoDb.Tests\Timor.Cms.Repository.MongoDb.Tests.csproj", "{9975CCC4-A4EB-42CA-8F8F-B6A4918B4791}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{D6211608-C0A6-41E9-AACE-9B4A5DDFE535}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -64,7 +66,8 @@ Global
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{B10EB7ED-9177-4F73-8955-258C0309A5AB} = {89E94202-A5ED-4283-AB7E-339001086B33}
-		{9975CCC4-A4EB-42CA-8F8F-B6A4918B4791} = {89E94202-A5ED-4283-AB7E-339001086B33}
+		{4D0D19AE-2155-48BF-A9F1-FBE62A37F74A} = {D6211608-C0A6-41E9-AACE-9B4A5DDFE535}
+		{9975CCC4-A4EB-42CA-8F8F-B6A4918B4791} = {D6211608-C0A6-41E9-AACE-9B4A5DDFE535}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {CE306704-0C52-4DAF-9D67-40268078156B}

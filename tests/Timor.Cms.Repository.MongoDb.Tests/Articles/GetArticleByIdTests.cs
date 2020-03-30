@@ -1,6 +1,9 @@
 ﻿using System;
+using System.Threading;
 using System.Threading.Tasks;
 using MongoDB.Bson;
+using MongoDB.Driver;
+using Moq;
 using Timor.Cms.Domains.Articles;
 using Timor.Cms.Repository.MongoDb.Articles;
 using Xunit;
@@ -12,7 +15,15 @@ namespace Timor.Cms.Repository.MongoDb.Tests.Articles
         [Fact]
         public async Task ShouldGetArticleSuccess()
         {
-            var repository = new ArticleRepository();
+            var mockProvider = new Mock<IMongoCollectionProvider>();
+            var mockCollection = new Mock<IMongoCollection<Article>>();
+
+            mockCollection.Setup(x => x.FindAsync(It.IsAny<FilterDefinition<Article>>(), default(FindOptions<Article, Article>), default(CancellationToken)))
+                .Returns(Task.FromResult(new Mock<IAsyncCursor<Article>>().Object));
+            mockProvider.Setup(x => x.GetCollection<Article>("article"))
+                .Returns(mockCollection.Object);
+
+            var repository = new ArticleRepository(mockProvider.Object);
 
             var article = new Article
             {
@@ -29,7 +40,9 @@ namespace Timor.Cms.Repository.MongoDb.Tests.Articles
         [Fact]
         public async Task ShouldReturnNullWhenIdNotExist()
         {
-            var repository = new ArticleRepository();
+            var mockProvider = new Mock<IMongoCollectionProvider>();
+            mockProvider.Setup(x => x.GetCollection<Article>("article")).Returns(new Mock<IMongoCollection<Article>>().Object);
+            var repository = new ArticleRepository(mockProvider.Object);
 
             var result = await repository.GetById(ObjectId.GenerateNewId());
 

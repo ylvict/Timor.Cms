@@ -13,7 +13,7 @@
     <ProjectReference Include="..\Timor.Cms.Service\Timor.Cms.Service.csproj">
       <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
     </ProjectReference>
-    <ProjectReference Include="..\Timor.Cms.Repository.MongoDb\Timor.Cms.Repository.MongoDb.csproj">
+    <ProjectReference Include="..\Repository\Timor.Cms.Repository.MongoDb\Timor.Cms.Repository.MongoDb.csproj">
       <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
     </ProjectReference>
     <ProjectReference Include="..\Timor.Cms.Api\Timor.Cms.Api.csproj">

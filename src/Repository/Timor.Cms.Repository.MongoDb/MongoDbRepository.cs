@@ -19,7 +19,6 @@ namespace Timor.Cms.Repository.MongoDb
         public virtual async Task<TEntity> GetById(ObjectId id)
         {
             var entity = await _collection.FindSync(a => a.Id == id).FirstOrDefaultAsync();
-
             return entity;
         }
 
