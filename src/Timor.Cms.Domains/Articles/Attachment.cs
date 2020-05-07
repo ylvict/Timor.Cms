@@ -1,9 +1,8 @@
-﻿using System;
-using Timor.Cms.Domains.Entities;
+﻿using Timor.Cms.Domains.Entities;
 
 namespace Timor.Cms.Domains.Articles
 {
-    public class Attachment : Entity
+    public class Attachment : DomainEntityBase
     {
         /// <summary>
         /// 附件显示名称

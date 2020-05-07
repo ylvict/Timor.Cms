@@ -1,46 +1,92 @@
+using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
-using Timor.Cms.Domains.Entities;
-using Timor.Cms.IRepository;
+using MongoDB.Bson;
+using MongoDB.Driver;
+using Timor.Cms.Infrastructure;
+using Timor.Cms.PersistModels.MongoDb.Entities;
+using Timor.Cms.Repository.MongoDb.Collections;
 
 namespace Timor.Cms.Repository.MongoDb
 {
-    public class MongoDbRepository<TEntity, TPrimaryKey> : IRepository<TEntity, TPrimaryKey>
-        where TEntity : Entity<TPrimaryKey>
+    public class MongoDbRepository<TEntity> : IMongoDbRepository<TEntity> where TEntity : MongoEntityBase
     {
-        public Task BatchDeleteAsync(List<TPrimaryKey> ids)
+        private readonly IMongoCollectionAdapter<TEntity> _collection;
+
+        public MongoDbRepository(IMongoCollectionProvider<TEntity> collectionProvider)
         {
-            throw new System.NotImplementedException();
+            _collection = collectionProvider.GetCollection();
         }
 
-        public Task DeleteAsync(TEntity entity)
+        public virtual async Task<TEntity> GetByIdAsync(ObjectId id)
         {
-            throw new System.NotImplementedException();
+            var entity = await _collection.Find(x => x.Id == id).FirstOrDefaultAsync();
+
+            return entity;
         }
 
-        public Task DeleteAsync(TPrimaryKey id)
+        public virtual async Task InsertAsync(TEntity entity)
         {
-            throw new System.NotImplementedException();
+            Guard.NotNull(entity, "插入失败!原因：参数不能为空。");
+
+            if (entity is AuditingMongoEntityBase auditingEntity)
+            {
+                auditingEntity.CreateTime = DateTime.Now;
+            }
+
+            await _collection.InsertOneAsync(entity);
         }
 
-        public Task<TEntity> GetAsync(TPrimaryKey id)
+        public virtual async Task UpdateAsync(TEntity entity)
         {
-            throw new System.NotImplementedException();
+            Guard.NotNull(entity, "更新失败!原因：参数不能为空。");
+
+            var result = await _collection.ReplaceOneAsync(x => x.Id == entity.Id, entity);
+
+            if (result.MatchedCount < 1)
+            {
+                throw new KeyNotFoundException("更新失败，未找到要更新的数据。");
+            }
         }
 
-        public Task<TPrimaryKey> InsertAndGetIdAsync(TEntity entity)
+
+        public virtual async Task DeleteAsync(ObjectId id)
         {
-            throw new System.NotImplementedException();
+            var result = await _collection.DeleteOneAsync(x => x.Id == id);
+
+            if (result.DeletedCount < 1)
+            {
+                throw new KeyNotFoundException("更新失败，未找到要更新的数据。");
+            }
         }
 
-        public Task InsertAsync(TEntity entity)
+        public virtual async Task DeleteAsync(TEntity entity)
         {
-            throw new System.NotImplementedException();
+            Guard.NotNull(entity, "删除失败，未找到要删除的数据");
+
+            await DeleteAsync(entity.Id);
         }
 
-        public Task UpdateAsync(TEntity entity)
+        public virtual async Task DeleteMultipleAsync(IEnumerable<ObjectId> ids)
         {
-            throw new System.NotImplementedException();
+            await _collection.DeleteManyAsync(Builders<TEntity>.Filter.Where(x => ids.Contains(x.Id)));
         }
+
+        public virtual async Task<List<TEntity>> FindAllAsync(Expression<Func<TEntity,bool>> condition)
+        {
+            return await _collection.Find(condition).ToListAsync();
+        }
+        
+        public virtual async Task<TEntity> FindFirstOrDefaultAsync(Expression<Func<TEntity,bool>> condition)
+        {
+            return await _collection.Find(condition).FirstOrDefaultAsync();
+        }
+        
+        
+
+        public Task<bool> ExistsAsync(Expression<Func<TEntity,bool>> filter)
+            => _collection.Find(filter).AnyAsync();
     }
 }

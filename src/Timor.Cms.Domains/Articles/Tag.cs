@@ -5,7 +5,7 @@ namespace Timor.Cms.Domains.Articles
     /// <summary>
     /// 文章标签
     /// </summary>
-    public class Tag : AuditingEntity
+    public class Tag : AuditingDomainEntityBase
     {
         /// <summary>
         /// 标签名称

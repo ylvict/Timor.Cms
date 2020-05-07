@@ -3,7 +3,7 @@ using Timor.Cms.Domains.Entities;
 
 namespace Timor.Cms.Domains.Navigations
 {
-    public class Menu : AuditingEntity
+    public class Menu : AuditingDomainEntityBase
     {
         /// <summary>
         /// 菜单名称

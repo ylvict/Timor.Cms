@@ -7,7 +7,7 @@ namespace Timor.Cms.Domains.Articles
     /// <summary>
     /// 分类
     /// </summary>
-    public class Category : AuditingEntity
+    public class Category : AuditingDomainEntityBase
     {
         /// <summary>
         /// 分类名称

@@ -4,11 +4,15 @@ using Autofac;
 
 namespace Timor.Cms.Infrastructure.Dependency
 {
-    public class ModuleRegister
+    public static class ModuleRegister
     {
         public static void Regist(ContainerBuilder builder,params Type[] appModuleTypes)
         {
-            builder.RegisterAssemblyModules(appModuleTypes.Select(moduleType => moduleType.Assembly).ToArray());
+            var allAssemblies = appModuleTypes.Select(moduleType => moduleType.Assembly).ToArray();
+            
+            AutoMapperRegister.Regist(builder,allAssemblies);
+            
+            builder.RegisterAssemblyModules(allAssemblies);
         }
     }
 }

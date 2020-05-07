@@ -5,7 +5,7 @@ namespace Timor.Cms.Domains.Ads
     /// <summary>
     /// 广告显示的位置
     /// </summary>
-    public class AdLocation : Entity
+    public class AdLocation : DomainEntityBase
     {
         /// <summary>
         /// 位置的唯一标识

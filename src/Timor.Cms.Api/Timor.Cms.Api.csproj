@@ -4,6 +4,11 @@
     <TargetFramework>netcoreapp5.0</TargetFramework>
   </PropertyGroup>
 
+  <PropertyGroup>
+      <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <NoWarn>$(NoWarn);1591</NoWarn>
+  </PropertyGroup>
+
 
   <ItemGroup>
     <ProjectReference Include="..\Timor.Cms.Service\Timor.Cms.Service.csproj">
@@ -13,4 +18,12 @@
    <ItemGroup>
     <FrameworkReference Include="Microsoft.AspNetCore.App" />
   </ItemGroup>
+   <ItemGroup>
+     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="5.0.0-preview.2.20167.3" />
+   </ItemGroup>
+   <ItemGroup>
+     <None Update="apisettings.json">
+       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+     </None>
+   </ItemGroup>
 </Project>

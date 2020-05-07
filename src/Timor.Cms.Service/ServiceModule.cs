@@ -4,6 +4,5 @@ namespace Timor.Cms.Service
 {
     public class ServiceModule : AppModule
     {
-
     }
 }

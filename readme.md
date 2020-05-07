@@ -2,7 +2,9 @@
 
 Timor CMS 是一款非常轻量级的内容管理系统，它不支持过多花里胡哨的功能，只会支持最基本的文章及分类的管理。
 
-Jax 参与了开源项目
+## 构建状态
+[![Build Status](https://dev.azure.com/timorcms/Timor.Cms/_apis/build/status/TimorCms.Timor.Cms?branchName=master)](https://dev.azure.com/timorcms/Timor.Cms/_build/latest?definitionId=1&branchName=master)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=TimorCms_Timor.Cms&metric=alert_status)](https://sonarcloud.io/dashboard?id=TimorCms_Timor.Cms)
 
 ## 技术栈
 

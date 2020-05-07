@@ -5,7 +5,7 @@ using Timor.Cms.Domains.Entities;
 
 namespace Timor.Cms.Domains.Articles
 {
-    public class Article : AuditingEntity
+    public class Article : AuditingDomainEntityBase
     {
         public Article()
         {
@@ -35,17 +35,22 @@ namespace Timor.Cms.Domains.Articles
         /// <summary>
         /// 封面图片
         /// </summary>
-        public Attachment CoverImageUrl { get; set; }
+        public Attachment CoverImage { get; set; }
 
         /// <summary>
         /// 作者
         /// </summary>
         public string Author { get; set; }
+        
+        /// <summary>
+        /// 是否发布
+        /// </summary>
+        public bool IsPublished { get; set; }
 
         /// <summary>
         /// 发布时间
         /// </summary>
-        public DateTime PublishDate { get; set; }
+        public DateTime? PublishDate { get; set; }
 
         /// <summary>
         /// 文章引用来源
